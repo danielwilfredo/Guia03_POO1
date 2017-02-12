@@ -4,6 +4,8 @@
  * and open the template in the editor.
 */
 package com.sv.udb.forms;
+import com.sv.udb.clases.Gasolina;
+import com.sv.udb.clases.datos;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,8 +24,28 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmMenuPrincipal
      */
+    List<datos> Actu;
+    private String ventGas;
     public FrmMenuPrincipal() {
         initComponents();
+          setLocationRelativeTo(null);
+    }
+    private void cargarData()
+    {
+        try
+        {
+            Gasolina obje = new Gasolina();
+            Actu = new ArrayList<>();
+            this.Actu = obje.getData();
+            /*for(Valores temp : obje.getData())
+            {
+                JOptionPane.showMessageDialog(this, "Tipo gasolina:" + temp.getTipo());
+            }*/
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro al leer archivo csv");
+        }
     }
 
     /**
@@ -39,7 +61,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnagregarcliente = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtmontoventa = new javax.swing.JTextField();
@@ -59,8 +81,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventas"));
 
         btnagregarcliente.setText("Vender");
+        btnagregarcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnagregarclienteActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtnombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jLabel1.setText("Nombre Cliente:");
 
@@ -76,7 +103,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtmontoventa, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -89,7 +116,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -102,12 +129,32 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         rbtngrupo.add(rbtndiesel);
         rbtndiesel.setText("Diesel");
+        rbtndiesel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtndieselItemStateChanged(evt);
+            }
+        });
+        rbtndiesel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtndieselActionPerformed(evt);
+            }
+        });
 
         rbtngrupo.add(rbtnregular);
         rbtnregular.setText("Regular");
+        rbtnregular.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtnregularItemStateChanged(evt);
+            }
+        });
 
         rbtngrupo.add(rbtnespecial);
         rbtnespecial.setText("Especial");
+        rbtnespecial.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtnespecialItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -210,6 +257,47 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rbtndieselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtndieselActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtndieselActionPerformed
+
+    private void btnagregarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarclienteActionPerformed
+         datos Agregar = new datos(ventGas, txtmontoventa.getText(), txtnombre.getText());
+            Actu.add(Agregar);
+            Gasolina obj = new Gasolina();
+            obj.Actualizar(Actu);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnagregarclienteActionPerformed
+
+    private void rbtndieselItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtndieselItemStateChanged
+        if(this.rbtndiesel.isSelected()==true)
+        {
+            //Imagen Imagen = new Imagen();
+        //jpdisponible.add(Imagen);
+        //jpdisponible.repaint();
+        ventGas="Diesel";
+        }
+    }//GEN-LAST:event_rbtndieselItemStateChanged
+
+    private void rbtnregularItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnregularItemStateChanged
+        if(this.rbtnregular.isSelected()==true)
+        {
+            //Imagen Imagen = new Imagen();
+        //jpdisponible.add(Imagen);
+        //jpdisponible.repaint();
+        ventGas="Regular";
+        }
+    }//GEN-LAST:event_rbtnregularItemStateChanged
+
+    private void rbtnespecialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnespecialItemStateChanged
+        if(this.rbtnespecial.isSelected()==true)
+        {
+            //Imagen Imagen = new Imagen();
+        //jpdisponible.add(Imagen);
+        //jpdisponible.repaint();
+        ventGas="Especial";
+        }
+    }//GEN-LAST:event_rbtnespecialItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -256,11 +344,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton rbtndiesel;
     private javax.swing.JRadioButton rbtnespecial;
     private javax.swing.ButtonGroup rbtngrupo;
     private javax.swing.JRadioButton rbtnregular;
     private javax.swing.JTextField txtmontoventa;
+    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }

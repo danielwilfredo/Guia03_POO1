@@ -13,9 +13,20 @@ public class datos {
     
     private String mont;
     private String nomb;
+    private String tipo;
 
-    datos(String string, String string0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   public datos(String mont , String tipo, String nomb) {
+        this.mont = mont;
+        this.tipo = tipo;
+        this.nomb = nomb;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
    

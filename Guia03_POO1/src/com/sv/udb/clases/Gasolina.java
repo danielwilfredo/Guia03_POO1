@@ -35,8 +35,8 @@ public class Gasolina {
                 while ((line = br.readLine()) != null)
                 {
                     String[] nota = line.split(simb);
-                 resp.add(new datos(nota[0], nota[1]));
-                }
+                 resp.add(new datos(nota[0], nota[1], nota[2]));
+                } 
             }
         }
         catch(Exception ex)
@@ -63,6 +63,7 @@ public class Gasolina {
             for(datos temp : Nuevo){
                  
                 csvOutput.write(temp.getMont());
+                csvOutput.write(temp.getTipo());
                 csvOutput.write(temp.getNomb());
                 csvOutput.endRecord();                   
             }
