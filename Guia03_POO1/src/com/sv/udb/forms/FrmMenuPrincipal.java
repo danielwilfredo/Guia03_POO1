@@ -30,6 +30,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public FrmMenuPrincipal() {
         initComponents();
           setLocationRelativeTo(null);
+          cargarData();
     }
     private void cargarData()
     {
@@ -269,6 +270,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             Actu.add(Agregar);
             Gasolina obj = new Gasolina();
             obj.Actualizar(Actu);  
+            JOptionPane.showMessageDialog(null, "Se agrego la venta ");
             
         } 
         catch (Exception e) {
