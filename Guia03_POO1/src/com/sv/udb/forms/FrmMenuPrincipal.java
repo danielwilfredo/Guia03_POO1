@@ -9,6 +9,7 @@ import com.sv.udb.clases.datos;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -262,10 +263,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtndieselActionPerformed
 
     private void btnagregarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarclienteActionPerformed
-         datos Agregar = new datos(ventGas, txtmontoventa.getText(), txtnombre.getText());
+
+        try {
+            datos Agregar = new datos(ventGas, txtmontoventa.getText(), txtnombre.getText());
             Actu.add(Agregar);
             Gasolina obj = new Gasolina();
-            obj.Actualizar(Actu);        // TODO add your handling code here:
+            obj.Actualizar(Actu);  
+            
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hubo un error " + e.getMessage());
+        }
+      // TODO add your handling code here:
     }//GEN-LAST:event_btnagregarclienteActionPerformed
 
     private void rbtndieselItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtndieselItemStateChanged

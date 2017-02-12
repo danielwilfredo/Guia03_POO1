@@ -45,9 +45,7 @@ public class Gasolina {
         }
     return resp;
     }
-    
-    
-    
+      
      public void Actualizar(List<datos> Nuevo){
         
         String outputFile = "src\\com\\sv\\udb\\files\\Datos.csv";
